@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\FormController;
+use App\Http\Controllers\OpenAIController;
+use App\Http\Controllers\PDFreportController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VideoController;
 use App\Http\Controllers\WhatsAppController;
@@ -44,6 +46,12 @@ Route::get('whatsapp',[WhatsAppController::class,'index']);
 Route::post('whatsapp',[WhatsAppController::class,'store'])->name('whatsapp.post');
 ########## Till here Twilio Account ########
 
+########## For PDF Report start here ############
+Route::get('pdf',[PDFreportController::class,'index']);
+######### till here PDF report ################
+
+#####open AI ###
+Route::get('open-ai', [OpenAIController::class, 'index']);
 
 
 Route::group(['prefix' => 'admin'], function () {
