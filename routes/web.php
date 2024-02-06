@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\FormController;
 use App\Http\Controllers\OpenAIController;
 use App\Http\Controllers\PDFreportController;
@@ -52,6 +53,11 @@ Route::get('pdf',[PDFreportController::class,'index']);
 
 #####open AI ###
 Route::get('open-ai', [OpenAIController::class, 'index']);
+
+
+##### Contact Form #########
+Route::resource('contact',ContactController::class);
+###### till here contact form ####
 
 
 Route::group(['prefix' => 'admin'], function () {
