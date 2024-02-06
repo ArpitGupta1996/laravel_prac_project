@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\Contact as MailContact;
 use App\Models\Contact;
 use App\Models\ContactForm;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class ContactController extends Controller
 {
@@ -39,6 +41,8 @@ class ContactController extends Controller
         ]);
 
         session()->flash('message', 'Your message sent successfully!');
+
+        Mail::to('arpitgupta19aug1996@gmail.com')->send(new MailContact($data));
 
         return redirect()->back();
     }
