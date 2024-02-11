@@ -17,9 +17,12 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
      */
     public function update(User $user, array $input): void
     {
+        // dd(request()->input('date'));
         Validator::make($input, [
             'name' => ['required', 'string', 'max:255'],
+            'phone' => ['required','numeric','min:10', Rule::unique('users')->ignore($user->id)],//phone number added by me
             'email' => ['required', 'email', 'max:255', Rule::unique('users')->ignore($user->id)],
+            'date' => ['nullable','date'], //dob field added by me
             'photo' => ['nullable', 'mimes:jpg,jpeg,png', 'max:1024'],
         ])->validateWithBag('updateProfileInformation');
 
@@ -34,6 +37,8 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
             $user->forceFill([
                 'name' => $input['name'],
                 'email' => $input['email'],
+                'phone' => $input['phone'], //added by me
+                'date' => $input['date'], //added by me
             ])->save();
         }
     }

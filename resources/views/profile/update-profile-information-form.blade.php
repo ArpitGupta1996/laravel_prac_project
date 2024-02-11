@@ -59,6 +59,20 @@
             <x-input-error for="name" class="mt-2" />
         </div>
 
+        <!--phone number -->
+        <div class="col-span-6 sm:col-span-4">
+            <x-label for="phone" value="{{ __('Phone Number') }}" />
+            <x-input id="phone" type="number" class="mt-1 block w-full" wire:model="state.phone" required autocomplete="phone" />
+            <x-input-error for="phone" class="mt-2" />
+        </div>
+
+        <!--date of birth -->
+        <div class="col-span-6 sm:col-span-4">
+            <x-label for="date" value="{{ __('Date of Birth') }}" />
+            <x-input id="date" type="date" class="mt-1 block w-full" wire:model="state.date" required autocomplete="date" />
+            <x-input-error for="date" class="mt-2" />
+        </div>
+
         <!-- Email -->
         <div class="col-span-6 sm:col-span-4">
             <x-label for="email" value="{{ __('Email') }}" />
