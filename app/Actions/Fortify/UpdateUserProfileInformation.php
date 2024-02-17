@@ -23,6 +23,8 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
             'phone' => ['required','numeric','min:10', Rule::unique('users')->ignore($user->id)],//phone number added by me
             'email' => ['required', 'email', 'max:255', Rule::unique('users')->ignore($user->id)],
             'date' => ['nullable','date'], //dob field added by me
+            'gender'=> ['nullable','string'], //gender field added here
+            'martial_status' => ['nullable','string'], //martial status
             'photo' => ['nullable', 'mimes:jpg,jpeg,png', 'max:1024'],
         ])->validateWithBag('updateProfileInformation');
 
@@ -39,6 +41,10 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
                 'email' => $input['email'],
                 'phone' => $input['phone'], //added by me
                 'date' => $input['date'], //added by me
+
+                'gender' => $input['gender'], //added by me for gender
+
+                'martial_status' => $input['martial_status']
             ])->save();
         }
     }

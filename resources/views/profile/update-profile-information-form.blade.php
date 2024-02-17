@@ -73,6 +73,29 @@
             <x-input-error for="date" class="mt-2" />
         </div>
 
+        {{-- gender option added here --}}
+        <div class="col-span-6 sm:col-span-4">
+            <x-label for="gender" value="{{ __('Gender') }}" />
+            <select id="gender" class="mt-1 block w-full" wire:model="state.gender" required autocomplete="gender">
+                <option value="0" disabled>Select Gender</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+            </select>
+            <x-input-error for="gender" class="mt-2" />
+        </div>
+
+        {{-- martial status added here --}}
+        <div class="col-span-6 sm:col-span-4">
+            <x-label for="martial_status" value="{{ __('Martial Status') }}" />
+            <select id="martial_status" class="mt-1 block w-full" wire:model="state.martial_status" required autocomplete="martial_status">
+                <option value="0" disabled>Select Martial Status</option>
+                <option value="married">Married</option>
+                <option value="unmarried">Unmarried</option>
+            </select>
+            <x-input-error for="gender" class="mt-2" />
+        </div>
+
         <!-- Email -->
         <div class="col-span-6 sm:col-span-4">
             <x-label for="email" value="{{ __('Email') }}" />
