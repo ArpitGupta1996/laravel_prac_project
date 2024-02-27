@@ -7,6 +7,9 @@
     <title>Your Laravel View</title>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
 </head>
 
 <body>
@@ -119,13 +122,25 @@
                 <textarea id="subject" name="subject" placeholder="Write something.." style="height:200px"></textarea>
 
                 <input type="submit" value="Submit">
+
+                {{-- <button class="g-recaptcha mt-4" data-sitekey="{{ config('services.recaptcha.key') }}">Submit</button> --}}
+
+                <div class="g-recaptcha" data-sitekey="{{ config('services.recaptcha.key') }}"></div>
             </form>
 
+
+            <script type="text/javascript">
+                var onloadCallback = function() {
+                    grecaptcha.render('html_element', {
+                        'sitekey': 'your_site_key'
+                    });
+                };
+            </script>
 
             <!-- Your other HTML content goes here -->
 
             <iframe class="map" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"
-                src="https://maps.google.com/maps?width=100%25&amp;height=100&amp;hl=en&amp;q=+(QDegrees)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
+                src="https://maps.google.com/maps?width=100%25&amp;height=100&amp;hl=en&amp;q=+(WorldTradePark)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
                 width="100%" height="300">
                 <a href="http://www.gps.ie/">truck gps</a>
             </iframe>

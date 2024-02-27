@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BlogController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\FormController;
 use App\Http\Controllers\OpenAIController;
@@ -59,6 +60,11 @@ Route::get('open-ai', [OpenAIController::class, 'index']);
 Route::resource('contact',ContactController::class);
 ###### till here contact form ####
 
+
+############ Blog Routes Start here #########
+Route::resource('blog', BlogController::class);
+Route::post('blog-detail', [BlogController::class,'detail']);
+########### till here blog route ############
 
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
