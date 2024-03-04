@@ -62,7 +62,10 @@ class UserController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $user_data = User::where('id', $id)->get();
+
+        // return $user_data;
+        return view('users.edit', compact('user_data'));
     }
 
     /**
@@ -70,7 +73,13 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        // return $request;
+        $user_update = User::where('id', $id)->update(['email' =>$request->email,
+                'phone' => $request->phone_number,
+                'password' => $request->password
+            ]);
+
+        return redirect()->back();
     }
 
     /**

@@ -64,80 +64,139 @@ class UserController extends Controller
         }
     }
 
-    public function sendsms($mobile){
+    // public function sendsms($mobile){
 
-        // dd("here");
-        // dd($mobile);
-        $mobileNumber = $mobile;
+    //     // dd("here");
+    //     // dd($mobile);
+    //     $mobileNumber = $mobile;
 
-        $otp_code = rand(1000,9999);
+    //     $otp_code = rand(1000,9999);
 
-        // $user = User::where('mobile_no', $mobile)->first();
+    //     // return $otp_code;
 
-        // $user->opt_code = $otp_code;
+    //     // $user = User::where('mobile_no', $mobile)->first();
 
-        // $user->save();
+    //     // $user->opt_code = $otp_code;
 
-        $senderId = "QQDSSUR";
+    //     // $user->save();
 
-        $message = $otp_code."your otp is";
+    //     $senderId = "QDSSUR";
 
-        $route = 430;
+    //     $message = $otp_code."your otp is";
 
-        $postData = array(
-            'username' => 'qdegree',
 
-            'password' => '7bc845dab5XX',
+    //     $route = 430;
 
-            'to' => $mobileNumber,
+    //     $postData = array(
+    //         'username' => 'qdegree',
 
-            'message' => $message,
+    //         'password' => '7bc845dab5XX',
 
-            'sender' => $senderId,
+    //         'to' => $mobileNumber,
 
-            'route' => $route,
+    //         'message' => $message,
 
-            'reqid' => 1,
-        );
+    //         'sender' => $senderId,
 
-        $url = "http://www.cloud.smsplus.in/API/WebSMS/Http/v1.0a/index.php";
+    //         'route' => $route,
 
-        $ch = curl_init();
+    //         'reqid' => 1,
+    //     );
 
-        curl_setopt_array($ch, array(
+    //     // return $postData;
 
-            CURLOPT_URL => $url,
+    //     $url = "http://www.cloud.smsplus.in/API/WebSMS/Http/v1.0a/index.php";
 
-            CURLOPT_RETURNTRANSFER => true,
+    //     $ch = curl_init();
 
-            CURLOPT_POST => true,
+    //     // dd($ch);
 
-            CURLOPT_POSTFIELDS => $postData,
+    //     curl_setopt_array($ch, array(
 
-            CURLOPT_RETURNTRANSFER => true,
+    //         CURLOPT_URL => $url,
 
-            CURLOPT_ENCODING => "",
+    //         CURLOPT_RETURNTRANSFER => true,
 
-            CURLOPT_MAXREDIRS => 10,
+    //         CURLOPT_POST => true,
 
-            CURLOPT_TIMEOUT => 30,
+    //         CURLOPT_POSTFIELDS => $postData,
 
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+    //         CURLOPT_RETURNTRANSFER => true,
 
-            CURLOPT_CUSTOMREQUEST => "POST",
+    //         CURLOPT_ENCODING => "",
 
-            CURLOPT_SSL_VERIFYHOST => 0,
+    //         CURLOPT_MAXREDIRS => 10,
 
-            CURLOPT_SSL_VERIFYPEER => 0,
+    //         CURLOPT_TIMEOUT => 30,
 
-        ));
+    //         CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
 
+    //         CURLOPT_CUSTOMREQUEST => "POST",
+
+    //         CURLOPT_SSL_VERIFYHOST => 0,
+
+    //         CURLOPT_SSL_VERIFYPEER => 0,
+
+    //     ));
+
+    //     $response = curl_exec($ch);
+
+    //     // dd($response);
+
+    //     $err = curl_error($ch);
+    //     // dd($err);
+
+    //     curl_close($ch);
+
+    //     return $response;
+    // }
+
+
+    public function sendsms($mobile,$msg,$otp_code) {
+        $message=$otp_code." ".$msg;
+        $xml_data ='<?xml version="1.0"?>
+                    <smslist>
+                    <sms>
+                    <user>qdegree</user>
+                    <password>7bc845dab5XX</password>
+                    <message>'.$message.'</message>
+                    <mobiles>'.$mobile.'</mobiles>
+                    <senderid>QDSSUR</senderid>
+                        <accusage>1</accusage>
+                        <responsein>csv</responsein>
+                    </sms>
+                    </smslist>';
+        $URL = "http://sms.smsmenow.in/sendsms.jsp?";
+        $ch = curl_init($URL);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0); 
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_ENCODING, 'UTF-8');
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/xml'));
+        curl_setopt($ch, CURLOPT_POSTFIELDS, "$xml_data");
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         $response = curl_exec($ch);
 
+        //curl_close($ch);
+        //$response = curl_exec($ch);
+        // print_r($response);die;
         $err = curl_error($ch);
-
         curl_close($ch);
-
-        return $response;
+        return true;
+           /* if ($err) {
+                $model = new \frontend\modules\nps\models\SmsLog();
+                $model->details = "cURL Error #:" . $err.$response.'---'.$response_id;
+                ;
+                $model->status = 0;
+                $model->save(false);
+                //echo "cURL Error #:" . $err;
+            } else {
+                $model = new \frontend\modules\nps\models\SmsLog();
+                $model->details = $response.'---'.$response_id;
+                $model->status = 1;
+                $model->save(false);
+                //echo $response;
+            }*/
+        //print_r($output); die;
     }
 }

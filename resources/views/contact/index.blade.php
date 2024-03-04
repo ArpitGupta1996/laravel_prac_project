@@ -102,14 +102,14 @@
             <form action="{{ route('contact.store') }}" method="post" enctype="multipart/form-data">
                 {{ csrf_field() }}
                 <label for="fname">Name</label>
-                <input type="text" id="fname" name="name" placeholder="Your name..">
+                <input type="text" id="fname" name="name" placeholder="Your name.." required>
 
                 <label for="email">Email</label>
-                <input type="email" id="lname" name="email" placeholder="Your email.." class="form-control">
+                <input type="email" id="lname" name="email" placeholder="Your email.." class="form-control" required>
 
                 <label for="phone">Phone</label>
                 <input type="number" id="phone" name="phone" placeholder="Your phone no.." class="form-control"
-                    min="10">
+                    min="10" required>
 
                 <label for="country">Country</label>
                 <select id="country" name="country">
@@ -119,7 +119,7 @@
                 </select>
 
                 <label for="subject">Subject</label>
-                <textarea id="subject" name="subject" placeholder="Write something.." style="height:200px"></textarea>
+                <textarea id="subject" name="subject" placeholder="Write something.." style="height:200px" required></textarea>
 
                 <input type="submit" value="Submit">
 

@@ -5,6 +5,7 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\FormController;
 use App\Http\Controllers\OpenAIController;
 use App\Http\Controllers\PDFreportController;
+use App\Http\Controllers\TestController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VideoController;
 use App\Http\Controllers\WhatsAppController;
@@ -65,6 +66,10 @@ Route::resource('contact',ContactController::class);
 Route::resource('blog', BlogController::class);
 Route::post('blog-detail', [BlogController::class,'detail']);
 ########### till here blog route ############
+
+#########ip######
+Route::get('/ip',[TestController::class,'ip']);
+###till here ip###
 
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();

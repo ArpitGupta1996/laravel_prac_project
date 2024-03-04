@@ -13,4 +13,10 @@ class TestController extends Controller
     // {
     //     return view()
     // }
+
+
+
+    public function ip(Request $request){
+        return $request->ip();
+    }
 }
