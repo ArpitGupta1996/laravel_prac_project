@@ -39,9 +39,17 @@
                             <i class="fa fa-pencil" title="edit"></i> &nbsp; &nbsp;
                         </a>
 
-                        <i class="fa fa-trash" title="delete"></i> &nbsp; &nbsp;
+                        <form action="{{ route('users.destroy', $user->id) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit">
+                                <i class="fa fa-trash" title="delete"></i> &nbsp; &nbsp;
+                            </button>
+                        </form>
 
-                        <i class="fa fa-eye" title="view"></i>
+                        <a href="{{ route('users.show', $user->id) }}" target="blank">
+                            <i class="fa fa-eye" title="view"></i>
+                        </a>
                     </td>
                 </tr>
             @endforeach

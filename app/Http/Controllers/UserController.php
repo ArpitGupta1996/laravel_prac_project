@@ -54,7 +54,9 @@ class UserController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $user_detail = User::where('id', $id)->get();
+        // return $user_detail;
+        return view('users.detail', compact('user_detail'));
     }
 
     /**
@@ -87,6 +89,8 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $delete_data = User::where('id', $id)->delete();
+
+        return redirect()->back();
     }
 }
