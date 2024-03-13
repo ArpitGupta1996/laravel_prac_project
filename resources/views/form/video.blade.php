@@ -11,6 +11,16 @@
     <div>
         <h3>Upload a video</h3>
         <hr>
+        @if ($errors->any())
+            <div>
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
         <form method="POST" action="{{ url('uploadVideo') }}" enctype="multipart/form-data">
             {{ csrf_field() }}
             <div>
@@ -19,7 +29,7 @@
             </div>
             <div>
                 <label>Choose Video</label>
-                <input type="file" name="video">
+                <input type="file" name="video" accept="video/*">
             </div>
             <hr>
             <button type="submit">Submit</button>

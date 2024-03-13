@@ -64,96 +64,100 @@ class UserController extends Controller
         }
     }
 
-    // public function sendsms($mobile){
+    public function sendsms($mobile){
 
-    //     // dd("here");
-    //     // dd($mobile);
-    //     $mobileNumber = $mobile;
+        // dd("here");
+        // dd($mobile);
+        $mobileNumber = $mobile;
 
-    //     $otp_code = rand(1000,9999);
+        $otp_code = rand(1000,9999);
 
-    //     // return $otp_code;
+        // return $otp_code;
 
-    //     // $user = User::where('mobile_no', $mobile)->first();
+        // $user = User::where('mobile_no', $mobile)->first();
 
-    //     // $user->opt_code = $otp_code;
+        // $user->opt_code = $otp_code;
 
-    //     // $user->save();
+        // $user->save();
 
-    //     $senderId = "QDSSUR";
+        $senderId = "QDSSUR";
 
-    //     $message = $otp_code."your otp is";
-
-
-    //     $route = 430;
-
-    //     $postData = array(
-    //         'username' => 'qdegree',
-
-    //         'password' => '7bc845dab5XX',
-
-    //         'to' => $mobileNumber,
-
-    //         'message' => $message,
-
-    //         'sender' => $senderId,
-
-    //         'route' => $route,
-
-    //         'reqid' => 1,
-    //     );
-
-    //     // return $postData;
-
-    //     $url = "http://www.cloud.smsplus.in/API/WebSMS/Http/v1.0a/index.php";
-
-    //     $ch = curl_init();
-
-    //     // dd($ch);
-
-    //     curl_setopt_array($ch, array(
-
-    //         CURLOPT_URL => $url,
-
-    //         CURLOPT_RETURNTRANSFER => true,
-
-    //         CURLOPT_POST => true,
-
-    //         CURLOPT_POSTFIELDS => $postData,
-
-    //         CURLOPT_RETURNTRANSFER => true,
-
-    //         CURLOPT_ENCODING => "",
-
-    //         CURLOPT_MAXREDIRS => 10,
-
-    //         CURLOPT_TIMEOUT => 30,
-
-    //         CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-
-    //         CURLOPT_CUSTOMREQUEST => "POST",
-
-    //         CURLOPT_SSL_VERIFYHOST => 0,
-
-    //         CURLOPT_SSL_VERIFYPEER => 0,
-
-    //     ));
-
-    //     $response = curl_exec($ch);
-
-    //     // dd($response);
-
-    //     $err = curl_error($ch);
-    //     // dd($err);
-
-    //     curl_close($ch);
-
-    //     return $response;
-    // }
+        $message = $otp_code."your otp is";
 
 
-    public function sendsms($mobile,$msg,$otp_code) {
+        $route = 430;
+
+        $postData = array(
+            'username' => 'qdegree',
+
+            'password' => '7bc845dab5XX',
+
+            'to' => $mobileNumber,
+
+            'message' => $message,
+
+            'sender' => $senderId,
+
+            'route' => $route,
+
+            'reqid' => 1,
+        );
+
+        // return $postData;
+
+        $url = "http://www.cloud.smsplus.in/API/WebSMS/Http/v1.0a/index.php";
+
+        $ch = curl_init();
+
+        // dd($ch);
+
+        curl_setopt_array($ch, array(
+
+            CURLOPT_URL => $url,
+
+            CURLOPT_RETURNTRANSFER => true,
+
+            CURLOPT_POST => true,
+
+            CURLOPT_POSTFIELDS => $postData,
+
+            CURLOPT_RETURNTRANSFER => true,
+
+            CURLOPT_ENCODING => "",
+
+            CURLOPT_MAXREDIRS => 10,
+
+            CURLOPT_TIMEOUT => 30,
+
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+
+            CURLOPT_CUSTOMREQUEST => "POST",
+
+            CURLOPT_SSL_VERIFYHOST => 0,
+
+            CURLOPT_SSL_VERIFYPEER => 0,
+
+        ));
+
+        $response = curl_exec($ch);
+
+        // dd($response);
+
+        $err = curl_error($ch);
+        // dd($err);
+
+        curl_close($ch);
+
+        return $response;
+    }
+
+
+    public function sendsmsold($mobile,$msg,$otp_code) {
+
+        // return $mobile;
         $message=$otp_code." ".$msg;
+
+        // return $message;
         $xml_data ='<?xml version="1.0"?>
                     <smslist>
                     <sms>
@@ -169,7 +173,7 @@ class UserController extends Controller
         $URL = "http://sms.smsmenow.in/sendsms.jsp?";
         $ch = curl_init($URL);
         curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0); 
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_ENCODING, 'UTF-8');
         curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/xml'));

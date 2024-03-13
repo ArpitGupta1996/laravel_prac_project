@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Navbar;
 use Illuminate\Http\Request;
 use PDO;
+use TCG\Voyager\Models\Post;
 
 class FormController extends Controller
 {
@@ -89,8 +90,17 @@ class FormController extends Controller
         // return $concatenatedTitles;
 
 
+        $posts = Post::pluck('image');
 
-        return view('form.navbar', compact('data'));
+        // return $posts;
+
+        $imageUrls = $posts->map(function ($image) {
+            return asset('storage/' . $image);
+        });
+
+        // return $imageUrls;
+
+        return view('form.navbar', compact('data','imageUrls'));
     }
 
 }

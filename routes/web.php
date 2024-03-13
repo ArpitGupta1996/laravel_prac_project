@@ -3,6 +3,7 @@
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\FormController;
+use App\Http\Controllers\HighchartController;
 use App\Http\Controllers\OpenAIController;
 use App\Http\Controllers\PDFreportController;
 use App\Http\Controllers\TestController;
@@ -70,6 +71,16 @@ Route::post('blog-detail', [BlogController::class,'detail']);
 #########ip######
 Route::get('/ip',[TestController::class,'ip']);
 ###till here ip###
+
+
+Route::get('user-status',[HighchartController::class,'handleChart']);
+
+
+Route::get('browsescreenshot',[TestController::class,'screenshot']);
+
+
+Route::get('barcode', 'App\Http\Controllers\BarcodeController@index')->name('home.index');
+
 
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();

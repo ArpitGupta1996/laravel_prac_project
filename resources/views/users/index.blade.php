@@ -18,6 +18,8 @@
                 <div class="pull-left">
                     <h2>Download Your PDF</h2>
                     <h4><?php echo date('d-m-Y'); ?></h4>
+
+                    <button onclick="window.print()">Print</button>
                 </div>
                 <div class="pull-right">
                     <a class="btn btn-primary" href="{{ route('users.index', ['download' => 'pdf']) }}">Download PDF</a>
