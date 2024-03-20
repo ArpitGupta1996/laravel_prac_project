@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\GeneratePDFWithMail;
+use App\Models\User;
 use Illuminate\Http\Request;
-
+// use Barryvdh\DomPDF\PDF;
+use \PDF;
+use Illuminate\Support\Facades\Mail;
 class PDFreportController extends Controller
 {
     /**
@@ -11,7 +15,10 @@ class PDFreportController extends Controller
      */
     public function index()
     {
-        return view('pdf.index');
+        // return view('pdf.index');
+
+        $user = User::all();
+        return view('pdf.data', compact('user'));
     }
 
     /**
@@ -19,7 +26,6 @@ class PDFreportController extends Controller
      */
     public function create()
     {
-        //
     }
 
     /**
@@ -60,5 +66,28 @@ class PDFreportController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+
+    public function createpdf()
+    {
+        $data = User::all();
+        // share data to view
+        view()->share('employee', $data);
+        $pdf = PDF::loadView('pdf_view', $data);
+        // download PDF file with download method
+        return $pdf->download('pdf_file.pdf');
+    }
+
+    public function sendmail(){
+        $data['email'] = "arpitgupta19aug1996@gmail.com";
+        $data['title'] = "Test Mail PDF";
+        $data['body'] = "This is Demo";
+
+        $pdf = PDF::loadView('emails.testmail', $data);
+        $data['pdf'] = $pdf;
+        Mail::to($data['email'])->send(new GeneratePDFWithMail($data));
+
+        dd('mail sent successfully');
     }
 }

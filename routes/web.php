@@ -39,6 +39,8 @@ Route::resource('users', UserController::class);
 Route::resource('form',FormController::class);
 Route::get('navbar-page', [FormController::class,'navbar']);
 
+Route::view('showdiv', 'hideshowdiv');
+
 ##########  Upload Video ##################
 Route::get('upload-video', [VideoController::class,'uploadedvideo']);
 Route::post('uploadVideo',[VideoController::class,'uploadVideo']);
@@ -52,6 +54,10 @@ Route::post('whatsapp',[WhatsAppController::class,'store'])->name('whatsapp.post
 
 ########## For PDF Report start here ############
 Route::get('pdf',[PDFreportController::class,'index']);
+Route::get('/employee/pdf', [PDFreportController::class, 'createpdf']);
+Route::get('send-email-pdf', [PDFreportController::class, 'sendmail']);
+
+
 ######### till here PDF report ################
 
 #####open AI ###
