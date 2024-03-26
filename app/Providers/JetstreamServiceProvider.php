@@ -69,9 +69,9 @@ class JetstreamServiceProvider extends ServiceProvider
 
         Jetstream::role('accounts', 'Accountant', [
             'read',
-            'create',
-            'update',
-        ])->description('Account users have the ability to read, create, and update.');
+            // 'create',
+            // 'update',
+        ])->description('Account users have the ability to read');
 
 
         Jetstream::role('manager', 'Manager', [
@@ -83,15 +83,13 @@ class JetstreamServiceProvider extends ServiceProvider
 
         Jetstream::role('QC', 'QC', [
             'read',
-            'create',
             'update',
-        ])->description('QC users have the ability to read, create, and update.');
+        ])->description('QC users have the ability to read and update.');
 
 
         Jetstream::role('QA', 'QA', [
             'read',
-            'create',
             'update',
-        ])->description('QA users have the ability to read, create, and update.');
+        ])->description('QA users have the ability to read and update.');
     }
 }

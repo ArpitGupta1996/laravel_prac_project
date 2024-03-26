@@ -44,6 +44,7 @@ Route::view('showdiv', 'hideshowdiv');
 ##########  Upload Video ##################
 Route::get('upload-video', [VideoController::class,'uploadedvideo']);
 Route::post('uploadVideo',[VideoController::class,'uploadVideo']);
+
 ###############till here upload video ##############
 
 

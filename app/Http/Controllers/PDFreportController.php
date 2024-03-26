@@ -74,7 +74,7 @@ class PDFreportController extends Controller
         $data = User::all();
         // share data to view
         view()->share('employee', $data);
-        $pdf = PDF::loadView('pdf_view', $data);
+        $pdf = PDF::loadView('pdf.pdf_view', array($data));
         // download PDF file with download method
         return $pdf->download('pdf_file.pdf');
     }

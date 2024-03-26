@@ -28,14 +28,28 @@
         </div><br>
         <table class="table table-bordered">
             <tr>
+                <th>Sr.No.</th>
                 <th>Name</th>
+                <th>Role</th>
                 <th>Email</th>
+                <th>Mobile Number</th>
+                <th>Image</th>
                 <th>Actions</th>
             </tr>
             @foreach ($user as $user)
                 <tr>
+                    <td>{{ $loop->iteration }}</td>
                     <td>{{ $user->name }}</td>
+                    @if ($user->role_id == '2')
+                        <td>User</td>
+                    @elseif($user->role_id == '1')
+                        <td>Admin</td>
+                    @endif
                     <td>{{ $user->email }}</td>
+                    <td>{{ $user->phone ?? '-' }}</td>
+                    <td>
+                        <img src={{ URL::to('storage/' . $user->avatar) }} width="40px";>
+                    </td>
                     <td>
                         <a href="{{ route('users.edit', $user->id) }}">
                             <i class="fa fa-pencil" title="edit"></i> &nbsp; &nbsp;

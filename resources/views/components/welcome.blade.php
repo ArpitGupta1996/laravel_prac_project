@@ -1,3 +1,66 @@
+<div>
+    <body>
+        <h1>Highcharts in Laravel Example</h1>
+        <div id="container"></div>
+    </body>
+
+    <?php
+
+    $data = App\Models\User::select(DB::raw('COUNT(*) as count'))->whereYear('created_at', date('Y'))->groupBy(DB::raw('Month(created_at)'))->pluck('count');
+    ?>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script type="text/javascript">
+        var userData = <?php echo json_encode($data); ?>;
+        Highcharts.chart('container', {
+            title: {
+                text: 'New User Growth, 2020'
+            },
+            subtitle: {
+                text: 'Source: positronx.io'
+            },
+            xAxis: {
+                categories: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September',
+                    'October', 'November', 'December'
+                ]
+            },
+            yAxis: {
+                title: {
+                    text: 'Number of New Users'
+                }
+            },
+            legend: {
+                layout: 'vertical',
+                align: 'right',
+                verticalAlign: 'middle'
+            },
+            plotOptions: {
+                series: {
+                    allowPointSelect: true
+                }
+            },
+            series: [{
+                name: 'New Users',
+                data: userData
+            }],
+            responsive: {
+                rules: [{
+                    condition: {
+                        maxWidth: 500
+                    },
+                    chartOptions: {
+                        legend: {
+                            layout: 'horizontal',
+                            align: 'center',
+                            verticalAlign: 'bottom'
+                        }
+                    }
+                }]
+            }
+        });
+    </script>
+</div>
+
+
 <div class="p-6 lg:p-8 bg-white dark:bg-gray-800 dark:bg-gradient-to-bl dark:from-gray-700/50 dark:via-transparent border-b border-gray-200 dark:border-gray-700">
     <x-application-logo class="block h-12 w-auto" />
 
