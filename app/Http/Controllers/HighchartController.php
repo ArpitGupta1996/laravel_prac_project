@@ -17,4 +17,9 @@ class HighchartController extends Controller
 
                 return view('users.data', compact('data'));
     }
+
+
+    public function indiamap(){
+        return view('highchart.map');
+    }
 }
